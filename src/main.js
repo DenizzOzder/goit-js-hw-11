@@ -51,6 +51,7 @@ function renderGallery(images) {
         title: 'Oops',
         message: `Sorry, there are no images matching your search. Please try again!`,
       });
+      lightbox.refresh();
       return
     }
   
