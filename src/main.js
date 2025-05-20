@@ -1,42 +1,8 @@
-import "izitoast/dist/css/iziToast.min.css";
+import { fetchImages } from './js/pixabay-api.js';
+import { renderGallery } from './js/render-functions.js'; 
+import iziToast from 'izitoast';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import iziToast from 'izitoast';
-import axios from "axios";
-
-const BASE_URL = 'https://pixabay.com/api/';
-const API_KEY = '50401137-cdbb52678a54314c233e4ec11';
-
-export async function fetchImages(query) {
-  const params = {
-    key: API_KEY,
-    q: query,
-    image_type: 'photo',
-    orientation: 'horizontal',
-    safesearch: true,
-  };
-
-  const response = await axios.get(BASE_URL, { params });
-  return response.data;
-}
-
-function renderGallery(images) {
-    return images.map(image => {
-      return `
-        <li class="gallery-item">
-          <a href="${image.largeImageURL}">
-            <img src="${image.webformatURL}" alt="${image.tags}" />
-          </a>
-          <div class="info">
-            <p>Likes: ${image.likes}</p>
-            <p>Views: ${image.views}</p>
-            <p>Comments: ${image.comments}</p>
-            <p>Downloads: ${image.downloads}</p>
-          </div>
-        </li>
-      `;
-    }).join('');
-  }
   const form = document.querySelector('#search-form');
   const gallery = document.querySelector('.gallery');
   const loader = document.querySelector('.loader');
@@ -79,4 +45,3 @@ function renderGallery(images) {
       iziToast.error({ title: 'Hata', message: 'Görseller alınamadı!' });
     }
   });
-
