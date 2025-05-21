@@ -23,14 +23,11 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
     }
     clearGallery();
     showLoader();
-    
-  
-    gallery.innerHTML = '';
-    loader.classList.remove('hidden');
+    hideLoader();
   
     try {
       const data = await fetchImages(query);
-      loader.classList.add('hidden');
+      showLoader();
   
       if (data.hits.length === 0) {
         iziToast.error({
