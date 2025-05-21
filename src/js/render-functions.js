@@ -3,6 +3,9 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import iziToast from 'izitoast';
 
+const gallery = document.querySelector(".gallery");
+const loader = document.querySelector(".loader");
+let lightbox = null;
 export function renderGallery(images) {
     return images.map(image => {
       return `
@@ -19,4 +22,23 @@ export function renderGallery(images) {
         </li>
       `;
     }).join('');
+    gallery.insertAdjacentHTML('beforeend',markup);
+
+    if (!lightbox) {
+      lightbox = new SimpleLightbox('.gallery a');
+    }else {
+      lightbox.refresh();
+    }
   }
+
+  export function clearGallery() {
+    gallery.innerHTML = '';
+  }
+
+  export function showLoader() {
+  loader.classList.remove('hidden');
+}
+
+export function hideLoader() {
+  loader.classList.add('hidden');
+}

@@ -1,8 +1,9 @@
 import { fetchImages } from './js/pixabay-api.js';
-import { renderGallery } from './js/render-functions.js'; 
+import { renderGallery, clearGallery, showLoader, hideLoader } from './js/render-functions.js'; 
 import iziToast from 'izitoast';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+
   const form = document.querySelector('#search-form');
   const gallery = document.querySelector('.gallery');
   const loader = document.querySelector('.loader');
@@ -20,6 +21,9 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
       lightbox.refresh();
       return
     }
+    clearGallery();
+    showLoader();
+    
   
     gallery.innerHTML = '';
     loader.classList.remove('hidden');
